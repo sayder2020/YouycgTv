@@ -7,7 +7,7 @@ import { SourceEditor } from './components/SourceEditor';
 import type { TVCategory, TVChannel } from './types';
 import { AlertTriangleIcon, LoaderIcon as AppLoaderIcon, ListIcon } from './components/icons';
 
-const DEFAULT_M3U_URL = 'https://m3.indeed.ccwu.cc/123456';
+const DEFAULT_M3U_URL = 'https://iptv-org.github.io/iptv/index.m3u';
 const LOCAL_STORAGE_CUSTOM_M3U_URL_KEY = 'customM3uUrl';
 
 // Simple hash function for generating fallback IDs
