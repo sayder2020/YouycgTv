@@ -265,3 +265,29 @@ export const App: React.FC = () => {
     </div>
   );
 };
+// 1. 从环境变量读取密码 (如果没配置，默认为空，即不启用保护)
+const PROTECT_PASSWORD = import.meta.env.VITE_APP_PASSWORD;
+
+// 2. 如果配置了密码，执行检查逻辑
+if (PROTECT_PASSWORD) {
+  // 检查浏览器本地存储中是否有正确的标记
+  const isUnlocked = localStorage.getItem('iptv_unlocked') === 'true';
+
+  if (!isUnlocked) {
+    // 如果没解锁，弹窗询问
+    const input = prompt('⚠️ 私人频道\n请输入访问密码：');
+
+    if (input === PROTECT_PASSWORD) {
+      // 密码正确：记录状态并刷新页面
+      localStorage.setItem('iptv_unlocked', 'true');
+      window.location.reload();
+    } else {
+      // 密码错误或点了取消：提示并尝试刷新（防止卡死）
+      if (input !== null) {
+        alert('❌ 密码错误！');
+      }
+      // 可选：如果不想让人无限重试，可以在这里跳转到空白页
+      // window.location.href = 'about:blank';
+    }
+  }
+}
